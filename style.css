@@ -1,0 +1,116 @@
+:root {
+    --gold: #d4af37;
+    --glass: rgba(255, 255, 255, 0.1);
+    --accent: #a569bd;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: #1a0f2e url('https://i.pinimg.com/originals/96/68/77/9668773db1a39c891dfaf54617678fa9.gif') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Header & Animaciones */
+.header { text-align: center; margin-top: 30px; animation: fadeIn 1.5s ease; }
+.header h1 { 
+    font-family: 'Great Vibes', cursive; 
+    font-size: clamp(50px, 9vw, 75px); 
+    margin: 10px 0; 
+    color: var(--gold);
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+.crown-icon { font-size: 40px; }
+.subtitle { letter-spacing: 5px; font-weight: 300; margin-bottom: 0; }
+
+/* Contador */
+.countdown-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+.time-box { 
+    background: rgba(0,0,0,0.6); 
+    border: 1px solid var(--gold); 
+    border-radius: 10px; 
+    padding: 10px; 
+    min-width: 60px; 
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+.time-box span { display: block; font-size: 24px; font-weight: bold; color: var(--gold); }
+.time-box small { font-size: 10px; text-transform: uppercase; }
+
+/* Contenedores Principales */
+.main-wrapper { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 20px; 
+    padding: 20px; 
+    max-width: 950px; 
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.glass-panel { 
+    background: var(--glass); 
+    backdrop-filter: blur(15px); 
+    border: 1px solid rgba(255,255,255,0.2); 
+    border-radius: 20px; 
+    padding: 30px 20px; 
+    width: 320px; 
+    text-align: center; 
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    animation: fadeInUp 1s ease;
+    transition: transform 0.3s ease;
+}
+.glass-panel:hover { transform: translateY(-5px); }
+
+/* Elementos Visuales */
+.map-circle { width: 140px; height: 140px; border-radius: 50%; border: 3px solid var(--gold); margin: 15px auto; overflow: hidden; background: #eee; }
+.cursive { font-family: 'Great Vibes', cursive; font-size: 32px; color: var(--gold); margin: 10px 0; }
+
+/* Botones e Inputs */
+.btn, .btn-outline { 
+    width: 100%; 
+    padding: 14px; 
+    border-radius: 25px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    transition: 0.3s; 
+    margin-top: 10px; 
+    border: none;
+    font-family: 'Montserrat';
+}
+.btn { 
+    background: linear-gradient(90deg, var(--accent), #f4d03f); 
+    color: white; 
+    box-shadow: 0 4px 15px rgba(165,105,189,0.4); 
+}
+.btn:hover { filter: brightness(1.1); transform: scale(1.02); }
+.btn-outline { background: transparent; color: white; border: 1px solid var(--gold); font-size: 0.8em; }
+.btn-outline:hover { background: rgba(212,175,55,0.1); }
+
+/* Formulario */
+.confirm-area { background: rgba(0,0,0,0.4); border-radius: 15px; padding: 20px; border: 1px solid rgba(255,255,255,0.1); margin-top: 15px; }
+input, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; font-size: 14px; box-sizing: border-box; }
+#msg { font-size: 12px; color: #f4d03f; min-height: 20px; margin-top: 10px; }
+#welcome-txt { font-weight: 600; color: var(--gold); margin-bottom: 5px; }
+
+/* Regalo y Fecha */
+.gift-info { border: 1px dashed var(--gold); border-radius: 15px; padding: 15px; margin-top: 20px; background: rgba(212, 175, 55, 0.05); }
+.gift-info p { font-size: 0.85em; line-height: 1.4; margin: 0; }
+.envelope-icon { font-size: 25px; margin-bottom: 5px; }
+.date-header { border-bottom: 1px solid var(--gold); padding-bottom: 15px; margin-bottom: 15px; }
+.day-name { display:block; font-size: 0.8em; letter-spacing: 2px; }
+.full-date { font-size: 1.2em; display: block; margin: 5px 0; }
+
+/* Keyframes */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 600px) { .glass-panel { width: 100%; } }

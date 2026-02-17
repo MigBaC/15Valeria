@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV - Valeria Unda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <div class="header">
+        <div class="crown-icon">👑</div>
+        <p class="subtitle">MIS XV AÑOS</p>
+        <h1>Valeria Unda</h1>
+
+        <div id="countdown" class="countdown-container">
+            <div class="time-box"><span id="days">00</span><small>Días</small></div>
+            <div class="time-box"><span id="hours">00</span><small>Hrs</small></div>
+            <div class="time-box"><span id="minutes">00</span><small>Min</small></div>
+            <div class="time-box"><span id="seconds">00</span><small>Seg</small></div>
+        </div>
+    </div>
+
+    <div class="main-wrapper">
+        <div class="glass-panel">
+            <h3 class="cursive">Lugar & Hora</h3>
+            <div class="map-circle">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <p><strong>Salón La Aurora</strong><br>Calle del Sol #456, Col. Estrellas</p>
+            <button class="btn-outline" onclick="agregarACalendario()">📅 Agendar Evento</button>
+            
+            <div class="gift-info">
+                <div class="envelope-icon">✉️</div>
+                <p>
+                    Tu presencia es mi mejor regalo. Si deseas tener un detalle conmigo, lo recibiré en <strong>sobre cerrado</strong> en la entrada.
+                </p>
+            </div>
+        </div>
+
+        <div class="glass-panel">
+            <div class="date-header">
+                <span class="day-name">JUEVES</span>
+                <strong class="full-date">02 de Abril, 2026</strong>
+                <span class="hour">19:00 Hrs.</span>
+            </div>
+            
+            <div id="confirm-area" class="confirm-area">
+                <p class="label-confirm">CONFIRMA TU ASISTENCIA</p>
+                <p class="deadline">⚠️ Límite: 13 de marzo</p>
+                
+                <div id="step1">
+                    <input type="text" id="nIn" placeholder="Escribe tu nombre y apellido">
+                    <button class="btn" onclick="buscarInvitado()">Verificar Lista</button>
+                </div>
+
+                <div id="step2" style="display:none">
+                    <p id="welcome-txt"></p>
+                    <label>¿Cuántos asistirán?</label>
+                    <select id="cSel"></select>
+                    <button class="btn" onclick="confirmarFinal()">Confirmar Ahora</button>
+                </div>
+
+                <p id="msg"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
