@@ -73,7 +73,7 @@ async function buscarInvitado() {
             }
             mensaje.innerText = "";
         } else {
-            mensaje.innerText = "No te encontramos. Intenta con tu nombre y primer apellido.";
+            mensaje.innerText = "No te encontramos. Intenta con tu primer nombre y primer apellido.";
         }
     } catch (e) {
         mensaje.innerText = "Error al conectar con el servidor.";
@@ -127,4 +127,5 @@ function agregarACalendario() {
 }
 
 // Inicializar
+
 window.onload = iniciarReloj;
