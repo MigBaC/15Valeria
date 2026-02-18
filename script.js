@@ -32,16 +32,33 @@ function iniciarReloj() {
 
 // 2. Buscar Invitado en Google Sheets
 async function buscarInvitado() {
-    const nombreIn = document.getElementById('nIn').value.trim();
+    let nombreIn = document.getElementById('nIn').value.trim();
     const mensaje = document.getElementById('msg');
     const area = document.getElementById('confirm-area');
 
-    if (nombreIn.length < 3) { 
-        mensaje.innerText = "Por favor, escribe tu nombre completo."; 
+    // 1. LIMPIEZA: Quitar múltiples espacios internos
+    nombreIn = nombreIn.replace(/\s+/g, ' ');
+
+    // 2. CAPITALIZACIÓN: "valeria unda" -> "Valeria Unda"
+    nombreIn = nombreIn.toLowerCase().split(' ').map(palabra => {
+        return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+    }).join(' ');
+
+    // Actualizamos el input para que el usuario vea su nombre bien escrito
+    document.getElementById('nIn').value = nombreIn;
+
+    // 3. VALIDACIÓN: Al menos dos palabras (Nombre y Apellido)
+    const regexNombreApellido = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+ [a-zA-ZÀ-ÿ\u00f1\u00d1]+/;
+
+    if (!regexNombreApellido.test(nombreIn)) { 
+        mensaje.innerText = "Por favor, ingresa al menos un nombre y un apellido.";
+        mensaje.style.color = "#ff4d4d";
         return; 
     }
 
+    // 4. PROCESO DE BÚSQUEDA
     mensaje.innerText = "Buscando en lista de honor...";
+    mensaje.style.color = "#f4d03f";
 
     try {
         const res = await fetch(`${URL_WEB_APP}?action=buscar&nombre=${encodeURIComponent(nombreIn)}`);
@@ -73,13 +90,12 @@ async function buscarInvitado() {
             }
             mensaje.innerText = "";
         } else {
-            mensaje.innerText = "No te encontramos. Intenta con tu primer nombre y primer apellido.";
+            mensaje.innerText = "No te encontramos. Verifica que tu nombre esté bien escrito.";
         }
     } catch (e) {
         mensaje.innerText = "Error al conectar con el servidor.";
     }
 }
-
 // 3. Confirmar Asistencia Final
 async function confirmarFinal() {
     const cant = document.getElementById('cSel').value;
@@ -129,3 +145,4 @@ function agregarACalendario() {
 // Inicializar
 
 window.onload = iniciarReloj;
+
