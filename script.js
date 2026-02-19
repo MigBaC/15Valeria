@@ -1,5 +1,5 @@
 // REEMPLAZA CON TU URL DE IMPLEMENTACIÓN
-const URL_WEB_APP = "https://script.google.com/macros/s/.../exec"; 
+const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbw0l0C4ofK5Otk09Jg0I2jt17iuoQbBFVZBJ5Jcb4JMVjYDlwUvdASkMnbljUUpcn_F0A/exec"; 
 let datosInvitado = null;
 
 // Reloj de cuenta regresiva
@@ -118,3 +118,4 @@ function agregarACalendario() {
 }
 
 window.onload = iniciarReloj;
+
