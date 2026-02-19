@@ -1,39 +1,45 @@
-const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbygXY35hggaho9NkonxGpCBkIaapk0Lg3Uw9bh_hCePTA9Mt-n8XOAwj1G9ttlrrk3Cew/exec"; 
+// REEMPLAZA CON TU URL DE IMPLEMENTACIÓN
+const URL_WEB_APP = "https://script.google.com/macros/s/.../exec"; 
 let datosInvitado = null;
 
+// Reloj de cuenta regresiva
 function iniciarReloj() {
     const evento = new Date('April 2, 2026 19:00:00').getTime();
     const update = () => {
         const ahora = new Date().getTime();
         const diff = evento - ahora;
+
         if (diff <= 0) {
-            document.getElementById("countdown").innerHTML = "¡ES HOY! ✨";
+            if(document.getElementById("countdown")) document.getElementById("countdown").innerHTML = "¡ES HOY! ✨";
             return;
         }
+
         const d = Math.floor(diff / 86400000);
         const h = Math.floor((diff % 86400000) / 3600000);
         const m = Math.floor((diff % 3600000) / 60000);
-        const s = Math.floor((diff % 60000) / 1000);
 
         if(document.getElementById("days")) document.getElementById("days").innerText = d.toString().padStart(2, '0');
         if(document.getElementById("hours")) document.getElementById("hours").innerText = h.toString().padStart(2, '0');
         if(document.getElementById("minutes")) document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
     };
-    setInterval(update, 1000);
     update();
+    setInterval(update, 60000); // Actualiza cada minuto para ahorrar recursos
 }
 
+// Lógica de búsqueda
 async function buscarInvitado() {
-    let nombreIn = document.getElementById('nIn').value.trim();
+    const input = document.getElementById('nIn');
+    let nombreIn = input.value.trim();
     const mensaje = document.getElementById('msg');
     const btnBusqueda = document.querySelector('#step1 .btn');
 
     if (nombreIn.length < 3) {
-        mensaje.innerText = "Escribe tu nombre completo.";
+        mensaje.innerText = "Ingresa tu nombre y apellido.";
+        mensaje.style.color = "#ff4d4d";
         return;
     }
 
-    mensaje.innerText = "Buscando en la lista de honor...";
+    mensaje.innerText = "Buscando en lista de honor...";
     mensaje.style.color = "#f4d03f";
     btnBusqueda.disabled = true;
 
@@ -45,11 +51,11 @@ async function buscarInvitado() {
             document.getElementById('confirm-area').innerHTML = `
                 <div style="animation: fadeIn 0.5s;">
                     <h3 class="cursive">¡Hola, ${data.nombre}!</h3>
-                    <p>Ya recibimos tu confirmación.</p>
+                    <p>Ya tenemos registrada tu asistencia.</p>
                     <div style="background: rgba(212,175,55,0.2); padding: 15px; border-radius: 10px; margin: 10px 0;">
-                        Lugares reservados: <strong>${data.pases}</strong>
+                        Lugares: <strong>${data.pases}</strong>
                     </div>
-                    <p class="cursive" style="font-size:22px;">¡Te esperamos!</p>
+                    <p class="cursive" style="font-size:22px;">¡Nos vemos pronto!</p>
                 </div>`;
         } else if (data.status === "ok") {
             datosInvitado = data;
@@ -71,12 +77,13 @@ async function buscarInvitado() {
             mensaje.style.color = "#ff4d4d";
         }
     } catch (e) {
-        mensaje.innerText = "Error de conexión. Intenta de nuevo.";
+        mensaje.innerText = "Error al conectar. Revisa tu internet.";
     } finally {
         btnBusqueda.disabled = false;
     }
 }
 
+// Confirmación final
 async function confirmarFinal() {
     const cant = document.getElementById('cSel').value;
     const btn = document.querySelector('#step2 .btn');
@@ -94,22 +101,20 @@ async function confirmarFinal() {
         document.getElementById('confirm-area').innerHTML = `
             <div style="animation: fadeInUp 0.5s;">
                 <h3 class="cursive" style="font-size:38px;">¡Confirmado!</h3>
-                <p>Tu lugar ha sido reservado con éxito.</p>
-                <p>¡Gracias por acompañarme!</p>
+                <p>Tu lugar ha sido reservado.</p>
+                <p>¡Gracias por ser parte de mi fiesta!</p>
             </div>`;
     } catch (e) {
-        alert("Hubo un problema. Intenta de nuevo.");
+        alert("Ocurrió un error. Intenta de nuevo.");
         btn.disabled = false;
     }
 }
 
 function agregarACalendario() {
     const titulo = "Mis XV - Valeria Unda";
-    const detalles = "Lluvia de sobres. Favor de confirmar asistencia.";
-    const lugar = "Salón La Aurora";
     const inicio = "20260402T190000";
     const fin = "20260403T020000";
-    window.open(`https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(titulo)}&dates=${inicio}/${fin}&details=${encodeURIComponent(detalles)}&location=${encodeURIComponent(lugar)}`);
+    window.open(`https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(titulo)}&dates=${inicio}/${fin}`);
 }
 
 window.onload = iniciarReloj;
